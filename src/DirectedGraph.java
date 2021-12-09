@@ -72,7 +72,7 @@ public class DirectedGraph  {
     }
 
     public void postOrderDFT(int v){
-        marked[v]=true;
+        marked[v] = true;
         for (Integer u: dag.get(v).getInList()){
             if (!marked[u]) postOrderDFT(u);
         }
@@ -81,7 +81,7 @@ public class DirectedGraph  {
         try {
             finishingN[tracker] = v;
             tracker++;
-        } catch(Exception e){
+        } catch(Exception e) {
             System.out.println("Failed");
         }
     }
@@ -91,7 +91,7 @@ public class DirectedGraph  {
         if (marked[v]) {
             return fillMarked;
         }
-        marked[v]=true;
+        marked[v] = true;
         fillMarked.add(v);
 
         for ( Integer u: dag.get(v).getOutList() )
@@ -100,9 +100,9 @@ public class DirectedGraph  {
         return fillMarked;
     }
 
-    public int[] findCCstats(int[] vertices) {
+    public int[] ccStats(int[] vertices) {
         int[] ccStats = new int[2];
-        for(int i = numVertex - 1; i >- 1; i--) {
+        for(int i = numVertex - 1; i >= 0; i--) {
             ArrayList<Integer> dF = depthFirst(finishingN[i]);
 
             if (dF.size() > 0)          ccStats[1]++; // count++
@@ -156,7 +156,7 @@ public class DirectedGraph  {
             vertices[finishingN[i]] = i;
         }
         marked = new boolean[numVertex];
-        int[] ccStats = findCCstats(vertices);
+        int[] ccStats = ccStats(vertices);
         System.out.println("(i) number of strongly connected components: "           + ccStats[1]);
         System.out.println("(ii) max size among all strongly connected components: " + ccStats[0]);
 
